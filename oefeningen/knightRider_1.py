@@ -9,5 +9,5 @@ while True: # blijf de hele tijd doorgaan
         leds[led].off() # maak index led van leds uit
     for led1 in range(7,0,-1):  # maak led gelijk aan 7 en trek er iedere keer 1 af tot 0
         leds[led1].on() # maak index led van leds aan
-        sleep(0.1)  # wcht 100ms
+        sleep(0.1)  # wacht 100ms
         leds[led1].off()    # maak index led van leds uit
