@@ -25,8 +25,17 @@ while True:
         temperature_c = dhtDevice.temperature
         humidity = dhtDevice.humidity
         temperature_in_celcius = sensor.get_temperature()
-        print(temperature_in_celcius)
-        print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}% ")
+        temperatuur = (temperature_in_celcius + temperature_c) /2
+        print(f"temp DS18B20: {temperature_in_celcius}°C")
+        print(f"Temp DHT11: {temperature_c:.1f}°C")
+        print("temperatuur:",temperatuur )
+        teller = 0
+        for temp in range(0, 35, 5):
+            if int(temperatuur) >= temp:
+                leds[teller].on()
+            else:
+                leds[teller].off()
+            teller += 1
     except RuntimeError as error:
         print(error.args[0])
         time.sleep(2.0)
@@ -36,4 +45,3 @@ while True:
         raise error
 
     time.sleep(2.0)
-
