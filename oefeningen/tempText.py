@@ -2,7 +2,7 @@ import time as time, board, adafruit_dht
 
 dhtDevice = adafruit_dht.DHT11(board.D18)
 
-f=open("tempText.txt","w")
+f=open("tempText.csv","w")
 f.write("nr.   Tijd   Temp.(°C) Vochtigheid(%) \n")
 f.close()
 teller = 1
@@ -13,7 +13,7 @@ while True:
             temperature_c = dhtDevice.temperature
             humidity = dhtDevice.humidity
             tijd = time.strftime("%H:%M:%S")
-            f=open("tempText.txt","a")
+            f=open("tempText.csv","a")
             f.write(f"{teller}\t{tijd}    {temperature_c}         {humidity} \n")
             f.close()
             print(time.strftime("%H:%M:%S"))
