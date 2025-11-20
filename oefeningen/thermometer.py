@@ -4,7 +4,6 @@ import board
 import adafruit_dht
 import RPi.GPIO as GPIO
 from w1thermsensor import W1ThermSensor
-from time import sleep
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4, GPIO.IN,pull_up_down=GPIO.PUD_UP)
@@ -23,7 +22,6 @@ temperatuur = (temperature_in_celcius + temperature_c) /2
 while True:
     try:
         temperature_c = dhtDevice.temperature
-        humidity = dhtDevice.humidity
         temperature_in_celcius = sensor.get_temperature()
         temperatuur = (temperature_in_celcius + temperature_c) /2
         print(f"temp DS18B20: {temperature_in_celcius}°C")
