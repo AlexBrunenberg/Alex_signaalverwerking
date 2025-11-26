@@ -33,4 +33,4 @@ while True: #doe de hele tijd
             continue    #ga verder
         except Exception as error:  #tenzij er een exception error is
             dhtDevice.exit()    #stop de dhtDevice
-            raise error #gooi de error weg
+            raise error #doe de error weg
