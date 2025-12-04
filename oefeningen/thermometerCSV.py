@@ -29,7 +29,6 @@ while True: #doe de hele tijd
             f.close()   #sluit het bestand
         except RuntimeError as error:   #tenzij er een runtime error is
             print(error.args[0])    #print de error
-            time.sleep(2.0) #wacht 2 seconden
             continue    #ga verder
         except Exception as error:  #tenzij er een exception error is
             dhtDevice.exit()    #stop de dhtDevice
