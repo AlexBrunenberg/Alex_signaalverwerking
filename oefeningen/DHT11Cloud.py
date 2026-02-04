@@ -11,7 +11,7 @@ f.write("temp,lv \n")   #schrijf in het bestand en maak een nieuwe regel
 f.close()   # stop met schrijven
 
 while True: #doe de hele tijd
-    if (int(time.strftime("%S"))%1) == 0:   #als de rest 0 is als je de seconden deelt door 5 
+    if (int(time.strftime("%S"))%3) == 0:   #als de rest 0 is als je de seconden deelt door 5 
         try:    #probeer
             temperature_c = dhtDevice.temperature   #zet de temperatuur van de DHT11 in variabele temperature_c
             luchtvochtigheid = dhtDevice.humidity   #zet de luchtvochtigheid van de DHT11 in variabele luchtvochtigheid
