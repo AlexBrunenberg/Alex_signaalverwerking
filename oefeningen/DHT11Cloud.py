@@ -19,7 +19,7 @@ while True: #doe de hele tijd
             f=open("DHT11Cloud.csv","a")    # voeg toe aan het bestand
             f.write(f"{temperature_c},{luchtvochtigheid}\n") #tekst schrijven in het bestand
             f.close()   #sluit het bestand
-            subprocess.run(["/bin/bash", "/bin/auto_push.sh"])
+            subprocess.run(["/bin/bash", "/usr/local/bin/auto_push.sh"])
         except RuntimeError as error:   #tenzij er een runtime error is
             print(error.args[0])    #print de error
             continue    #ga verder
