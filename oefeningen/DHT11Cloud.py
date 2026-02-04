@@ -3,8 +3,8 @@ import time,board,adafruit_dht, subprocess #importeer
 
 dhtDevice = adafruit_dht.DHT11(board.D18)   #verbind de dht11 op pin 18 en noem het dhtDevice
 
-#temperature_c = dhtDevice.temperature   #zet de temperatuur van de DHT11 in variabele temperature_c
-#luchtvochtigheid = dhtDevice.humidity   #zet de luchtvochtigheid van de DHT11 in variabele luchtvochtigheid
+temperature_c = dhtDevice.temperature   #zet de temperatuur van de DHT11 in variabele temperature_c
+luchtvochtigheid = dhtDevice.humidity   #zet de luchtvochtigheid van de DHT11 in variabele luchtvochtigheid
 
 f=open("DHT11Cloud.csv","w")    #start met schrijven in het bestand DHT11Cloud.csv
 f.write("temp,lv \n")   #schrijf in het bestand en maak een nieuwe regel
