@@ -15,6 +15,7 @@ while True: #doe de hele tijd
         try:    #probeer
             temperature_c = dhtDevice.temperature   #zet de temperatuur van de DHT11 in variabele temperature_c
             luchtvochtigheid = dhtDevice.humidity   #zet de luchtvochtigheid van de DHT11 in variabele luchtvochtigheid
+            print(temperature_c, luchtvochtigheid)
             f=open("thermometerCSV.csv","a")    # voeg toe aan het bestand
             f.write(f"{temperature_c},{luchtvochtigheid}\n") #tekst schrijven in het bestand
             f.close()   #sluit het bestand
