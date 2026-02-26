@@ -13,7 +13,7 @@ while True: # blijf altijd doorgaan
             if temperatuur < 15:    # als de temperatuur kleiner is dan 15
                 angle = 0   # zet 0 in de variabele angle
             elif temperatuur < 20:  # als de temperatuur kleiner is dan 20
-                angle = 90   # zet 90 in de variabele angle
+                angle = (temperatuur - 15) * 36
             else:   # anders
                 angle = 180 # zet 180 in de variabele angle
             servo.angle = angle # draai de servo naar de waarde van de angle
