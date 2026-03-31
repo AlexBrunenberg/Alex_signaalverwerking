@@ -1,6 +1,6 @@
 from gpiozero import Motor, Button, AngularServo # importeer modules
 from time import sleep  # importeer module
-import adafruit_dht, board # importeer
+import adafruit_dht, board # importeer modules
 
 motor = Motor(forward=17, backward=14, pwm=True)    # stel de pinnen in voor de motor om naar voor of achter te gaan en zet pwm aan
 drukknopPlus = Button(9)    # verbindt variabele drukknopPlus met drukknop op pin 9
@@ -38,24 +38,23 @@ while True: # doe altijd
         print(dcmotorSnelheid)    # print de waarde van de variabele dcmotorSnelheid
     if not drukknopMin.is_active and statusMin == 1:    # als drukknopMin niet is ingedrukt en statusMin is gelijk aan 1 dan
         statusMin = 0   # verander statusMin naar 0
+
     # deel 2
     try:    # probeer
         luchtvochtigheid = dht.humidity # zet de luchtvochtigheid van de dht11 in de variabele luchtvochtigheid
         print(luchtvochtigheid) # print de luchtvochtigheid
-        if luchtvochtigheid != None:
-            if luchtvochtigheid <= 40:
-                hoek = 10
-            elif luchtvochtigheid <= 60:
-                hoek = 45
-            elif luchtvochtigheid <= 75:
-                hoek = 90
-            elif luchtvochtigheid <= 90:
-                hoek = 135
-            else:
-                hoek = 170
-        if hoek != hoekOud:
-            servo.angle = hoek
-            hoekOud = hoek
+        if luchtvochtigheid != None:    # als de luchtvochtigheid niet niks is dan
+            if luchtvochtigheid <= 40:  # als de luchtvochtigheid kleiner of gelijk aan 40 is dan
+                hoek = 10   # maak hoek gelijk aan 10
+            elif luchtvochtigheid <= 60:    # anders  als de luchtvochtgheid kleiner of gelijk aan 60 is dan
+                hoek = 45   # maak hoek gelijk aan 45
+            elif luchtvochtigheid <= 75:    # anders  als de luchtvochtigheid kleiner of gelijk aan 75 is dan
+                hoek = 90   # maak hoek gelijk aan 90
+            elif luchtvochtigheid <= 90:    # anders als de luchtvochtigheid kleiner of gelijk aan 90 is dan 
+                hoek = 135  # maak hoek gelijk aan 135
+            else:   # anders
+                hoek = 170  # maak hoek gelijk aan 170
+        servo.angle = hoek  # zet de servo op het aantal graden dat variabele hoek aangeeft
     except RuntimeError as error:   # tenzij er een runEimeError is
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])    # print de error
