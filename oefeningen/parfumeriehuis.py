@@ -1,5 +1,6 @@
-from gpiozero import Motor, Button # importeer modules
+from gpiozero import Motor, Button, AngularServo # importeer modules
 from time import sleep  # importeer module
+import adafruit_dht, board # importeer
 
 motor = Motor(forward=17, backward=14, pwm=True)    # stel de pinnen in voor de motor om naar voor of achter te gaan en zet pwm aan
 drukknopPlus = Button(9)    # verbindt variabele drukknopPlus met drukknop op pin 9
@@ -9,6 +10,11 @@ dcmotorSnelheid = 1 # maak variabele dcmotorSnelheid aan en gelijk aan 1
 statusPlus = 0  # maak variabele statusPlus aan
 statusEnter = 0 # maak variabele statusEnter aan
 statusMin = 0   # maak variabele statusMin aan
+
+dht = adafruit_dht.DHT11(board.D18)   # verbind de dht11 op pin 18 en noem het dht
+servo = AngularServo(27, min_angle=0, max_angle=180)   # verbind de servo op pin 27 en noem het servo
+hoek = 0    # maak variabele hoek aan
+hoekOud = 0 # maak variabele hoekOud aan
 
 while True: # doe altijd
     # deel 1
@@ -33,5 +39,28 @@ while True: # doe altijd
     if not drukknopMin.is_active and statusMin == 1:    # als drukknopMin niet is ingedrukt en statusMin is gelijk aan 1 dan
         statusMin = 0   # verander statusMin naar 0
     # deel 2
-    
+    try:    # probeer
+        luchtvochtigheid = dht.humidity # zet de luchtvochtigheid van de dht11 in de variabele luchtvochtigheid
+        print(luchtvochtigheid) # print de luchtvochtigheid
+        if luchtvochtigheid != None:
+            if luchtvochtigheid <= 40:
+                hoek = 10
+            elif luchtvochtigheid <= 60:
+                hoek = 45
+            elif luchtvochtigheid <= 75:
+                hoek = 90
+            elif luchtvochtigheid <= 90:
+                hoek = 135
+            else:
+                hoek = 170
+        if hoek != hoekOud:
+            servo.angle = hoek
+            hoekOud = hoek
+    except RuntimeError as error:   # tenzij er een runEimeError is
+        # Errors happen fairly often, DHT's are hard to read, just keep going
+        print(error.args[0])    # print de error
+        continue    # ga verder
+    except Exception as error:  # tenzij er een exception error is
+        dht.exit()    # stop de dht device
+        raise error # doe de error weg
     sleep(.05)    # wacht 0.05 seconde
